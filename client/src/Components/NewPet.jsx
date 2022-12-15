@@ -13,18 +13,6 @@ const NewPet = () => {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
-  async function dogImage() {
-    try{
-      let response = await axios.get("https://dog.ceo/api/breeds/image/random")
-      setImage(response.data.message)
-      console.log(image)
-
-    }catch(err){
-      console.log(err.response.data.errors);
-      setErrors(err.response.data.errors);
-    }
-
-  }
   const handleSubmit = (e) => {
     e.preventDefault();
     //check if skills are blank so we do not save null in database
@@ -37,7 +25,16 @@ const NewPet = () => {
     if (skill3 === "") {
       setSkill3("None");
     }
-    dogImage();
+    axios.get("https://dog.ceo/api/breeds/image/random")
+    .then((response) => {
+      console.log(response.data.message);
+      setImage(response.data.message);
+      console.log(image);
+    })
+    .catch((err) => {
+              console.log(err.response.data.errors);
+        setErrors(err.response.data.errors);
+    })
     axios
       .post("http://localhost:8000/api/pets", {
         image,

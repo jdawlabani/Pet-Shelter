@@ -3,6 +3,9 @@ var uniqueValidator = require("mongoose-unique-validator");
 
 const PetSchema = new mongoose.Schema(
   {
+    image: {
+      type: String
+    },
     name: {
       type: String,
       required: [true, "Name is required"],

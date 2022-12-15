@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const NewPet = () => {
+  const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
@@ -24,8 +25,15 @@ const NewPet = () => {
     if (skill3 === "") {
       setSkill3("None");
     }
+    axios.get("https://dog.ceo/api/breeds/image/random")
+    .then((response) => {
+      console.log(response.data.message);
+      setImage(response.data.message);
+      console.log(image);
+    })
     axios
       .post("http://localhost:8000/api/pets", {
+        image,
         name,
         type,
         description,

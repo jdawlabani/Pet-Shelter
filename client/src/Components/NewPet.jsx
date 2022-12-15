@@ -25,16 +25,17 @@ const NewPet = () => {
     if (skill3 === "") {
       setSkill3("None");
     }
-    axios.get("https://dog.ceo/api/breeds/image/random")
-    .then((response) => {
-      console.log(response.data.message);
-      setImage(response.data.message);
-      console.log(image);
-    })
-    .catch((err) => {
-              console.log(err.response.data.errors);
-        setErrors(err.response.data.errors);
-    })
+    if (type === "dog" || type === "Dog") {
+      axios
+        .get("https://dog.ceo/api/breeds/image/random")
+        .then((response) => {
+          setImage(response.data.message);
+        })
+        .catch((err) => {
+          console.log(err.response.data.errors);
+          setErrors(err.response.data.errors);
+        });
+    }
     axios
       .post("http://localhost:8000/api/pets", {
         image,
@@ -73,7 +74,9 @@ const NewPet = () => {
                 <p className="text-danger">{errors.name.message}</p>
               )}
             {errors.name && errors.name.kind === "unique" && (
-              <p className="text-danger">{errors.name.properties.value} has already been taken!</p>
+              <p className="text-danger">
+                {errors.name.properties.value} has already been taken!
+              </p>
             )}
             <input
               type="text"

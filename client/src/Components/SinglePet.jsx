@@ -39,7 +39,6 @@ const SinglePet = () => {
       </div>
       <div className="d-flex justify-content-around">
         <h3>Details about: {pet.name}</h3>
-        <img src={pet.image} alt="No image found" />
         <button
           className="btn btn-danger"
           onClick={(e) => deleteHandler(pet._id)}
@@ -56,6 +55,7 @@ const SinglePet = () => {
           <li>{pet.skill2}</li>
           <li>{pet.skill3}</li>
         </ol>
+        <img src={pet.image} alt="No pet found"/>
       </div>
     </>
   );

@@ -55,7 +55,7 @@ const SinglePet = () => {
           <li>{pet.skill2}</li>
           <li>{pet.skill3}</li>
         </ol>
-        <img src={pet.image} alt="No pet found"/>
+        <img src={pet.image} alt="No picture of pet attached"/>
       </div>
     </>
   );
